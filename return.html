@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+<!-- 目标：浏览列表页面，点击进入详情页面，当从详情页面返回时，页面能定位到进入详情页时的位置，同时加载之前的缓存 -->
+
+	<!-- 列表页 -->
+	<ul>
+	    <li><a onclick="godetail(1)"></a></li>
+	    <li><a onclick="godetail(2)"></a></li>
+	    <li><a onclick="godetail(3)"></a></li>
+	    <li><a onclick="godetail(4)"></a></li>
+	    <li><a onclick="godetail(5)"></a></li>
+	    <li><a onclick="godetail(6)"></a></li>
+	    <li><a onclick="godetail(7)"></a></li>
+	    <li><a onclick="godetail(8)"></a></li>
+	    <li><a onclick="godetail(9)"></a></li>
+	    <li><a onclick="godetail(10)"></a></li>
+	</ul>
+
+	<script>
+
+		function godetail(id) {
+		    sessionStorage.setItem("articleId", $(window).scrollTop());//获取滑动高度存入缓存
+		    location.href = "Detail?id=" + id;
+		}
+		 
+		//返回的时候判断
+		var articleId = 0;
+		if (sessionStorage.getItem("articleId") != null) {
+		    articleId = sessionStorage.getItem("articleId");
+		    sessionStorage.removeItem("articleId");//注意使用一次就清理掉
+		}
+
+		$(window).scrollTop(articleId)//设置滑动的高度
+	</script>
+</body>
+</html>
